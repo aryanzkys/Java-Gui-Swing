@@ -1,6 +1,7 @@
 # LK08 - Junior High School Library Management System (Swing GUI)
 
 Proyek ini dibuat untuk tugas **Pemrograman Lanjut (LK08)** berupa aplikasi Java berbasis **GUI Swing** untuk manajemen perpustakaan SMP.
+Versi ini menggantikan alur berbasis console menjadi tampilan tab GUI.
 
 ## Identitas Tim
 
@@ -79,6 +80,7 @@ Semua data disimpan dalam file teks dengan delimiter `|`:
 - Login dengan **NIP** dan **Nama**
 - Data diambil dari `pegawai.txt`
 - Jika gagal, user diminta mengulang
+ - Form login menggunakan dialog GUI
 
 ### 2) Menu Utama (GUI)
 - Tab **Siswa**
@@ -133,16 +135,12 @@ Aturan:
 - Ubah status dari `0` ke `1`
 - Simpan kembali ke file
 
-### 8) Laporan
-```
-===== REPORT MENU =====
-1. Books Not Returned
-2. Overdue Borrowers
-3. Borrow History
-4. Total Students
-5. Total Books
-6. Back
-```
+### 8) Laporan (GUI)
+- Buku Belum Kembali
+- Peminjam Terlambat
+- Riwayat Peminjaman
+- Total Siswa
+- Total Buku
 
 Keterangan:
 - **Overdue** jika `tanggal kembali < tanggal hari ini` dan `status = 0`

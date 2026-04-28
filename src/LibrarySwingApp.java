@@ -1,20 +1,3 @@
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -28,6 +11,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 public class LibrarySwingApp {
     private static final String STUDENT_FILE = "data/siswa.txt";
@@ -173,6 +170,7 @@ public class LibrarySwingApp {
         JPanel panel = new JPanel(new BorderLayout());
 
         studentTableModel = new DefaultTableModel(new String[]{"NIS", "Nama", "Alamat"}, 0) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -180,6 +178,7 @@ public class LibrarySwingApp {
         studentTable = new JTable(studentTableModel);
         studentTable.setPreferredScrollableViewportSize(new Dimension(700, 240));
         studentTable.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 int row = studentTable.getSelectedRow();
                 if (row >= 0) {
@@ -265,12 +264,14 @@ public class LibrarySwingApp {
         JPanel panel = new JPanel(new BorderLayout());
 
         bookTableModel = new DefaultTableModel(new String[]{"Kode", "Judul", "Jenis"}, 0) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         bookTable = new JTable(bookTableModel);
         bookTable.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 int row = bookTable.getSelectedRow();
                 if (row >= 0) {
@@ -356,12 +357,14 @@ public class LibrarySwingApp {
         JPanel panel = new JPanel(new BorderLayout());
 
         employeeTableModel = new DefaultTableModel(new String[]{"NIP", "Nama", "Tgl Lahir"}, 0) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         employeeTable = new JTable(employeeTableModel);
         employeeTable.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 int row = employeeTable.getSelectedRow();
                 if (row >= 0) {
@@ -431,6 +434,7 @@ public class LibrarySwingApp {
         JPanel panel = new JPanel(new BorderLayout());
 
         transactionTableModel = new DefaultTableModel(new String[]{"Kode", "NIS", "Kode Buku", "Pinjam", "Kembali", "Status"}, 0) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -525,6 +529,7 @@ public class LibrarySwingApp {
         top.add(totalBooksBtn);
 
         reportTableModel = new DefaultTableModel(new String[]{"Kode", "Siswa", "Buku", "Batas Kembali", "Status"}, 0) {
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -625,7 +630,7 @@ public class LibrarySwingApp {
             return;
         }
 
-        List<Student> results = new ArrayList<Student>();
+        List<Student> results = new ArrayList<>();
         for (Student student : students) {
             String full = (student.getNis() + " " + student.getName() + " " + student.getAddress()).toLowerCase();
             if (full.contains(keyword)) {
@@ -720,7 +725,7 @@ public class LibrarySwingApp {
             return;
         }
 
-        List<Book> results = new ArrayList<Book>();
+        List<Book> results = new ArrayList<>();
         for (Book book : books) {
             String full = (book.getCode() + " " + book.getTitle() + " " + book.getType()).toLowerCase();
             if (full.contains(keyword)) {
@@ -1057,17 +1062,17 @@ public class LibrarySwingApp {
         FileHelper.ensureFileExists(EMPLOYEE_FILE);
         FileHelper.ensureFileExists(TRANSACTION_FILE);
 
-        List<String> dummyStudents = new ArrayList<String>();
+        List<String> dummyStudents = new ArrayList<>();
         dummyStudents.add("231001|Budi Santoso|Jl. Mawar No. 12");
         dummyStudents.add("231002|Siti Aminah|Jl. Melati No. 8");
         dummyStudents.add("231003|Raka Pratama|Jl. Kenanga No. 5");
 
-        List<String> dummyBooks = new ArrayList<String>();
+        List<String> dummyBooks = new ArrayList<>();
         dummyBooks.add("BK001|Matematika Kelas 9|Pelajaran");
         dummyBooks.add("BK002|IPA Terpadu|Pelajaran");
         dummyBooks.add("BK003|Laskar Pelangi|Novel");
 
-        List<String> dummyEmployees = new ArrayList<String>();
+        List<String> dummyEmployees = new ArrayList<>();
         dummyEmployees.add("255150207111059|ARYAN ZAKY PRAYOGO|2004-07-10");
         dummyEmployees.add("255150200111042|ACHMAD HUJAIRI|2004-02-22");
         dummyEmployees.add("255150201111025|M. HIDAYATULLOH H. A. M|2004-05-19");
@@ -1081,7 +1086,7 @@ public class LibrarySwingApp {
 
     private List<Student> loadStudents() {
         List<String> lines = FileHelper.readLines(STUDENT_FILE);
-        List<Student> students = new ArrayList<Student>();
+        List<Student> students = new ArrayList<>();
         for (String line : lines) {
             Student student = Student.fromLine(line);
             if (student != null) {
@@ -1092,7 +1097,7 @@ public class LibrarySwingApp {
     }
 
     private void saveStudents(List<Student> students) {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         for (Student student : students) {
             lines.add(student.toLine());
         }
@@ -1101,7 +1106,7 @@ public class LibrarySwingApp {
 
     private List<Book> loadBooks() {
         List<String> lines = FileHelper.readLines(BOOK_FILE);
-        List<Book> books = new ArrayList<Book>();
+        List<Book> books = new ArrayList<>();
         for (String line : lines) {
             Book book = Book.fromLine(line);
             if (book != null) {
@@ -1112,7 +1117,7 @@ public class LibrarySwingApp {
     }
 
     private void saveBooks(List<Book> books) {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         for (Book book : books) {
             lines.add(book.toLine());
         }
@@ -1121,7 +1126,7 @@ public class LibrarySwingApp {
 
     private List<Employee> loadEmployees() {
         List<String> lines = FileHelper.readLines(EMPLOYEE_FILE);
-        List<Employee> employees = new ArrayList<Employee>();
+        List<Employee> employees = new ArrayList<>();
         for (String line : lines) {
             Employee employee = Employee.fromLine(line);
             if (employee != null) {
@@ -1132,7 +1137,7 @@ public class LibrarySwingApp {
     }
 
     private void saveEmployees(List<Employee> employees) {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         for (Employee employee : employees) {
             lines.add(employee.toLine());
         }
@@ -1141,7 +1146,7 @@ public class LibrarySwingApp {
 
     private List<Transaction> loadTransactions() {
         List<String> lines = FileHelper.readLines(TRANSACTION_FILE);
-        List<Transaction> transactions = new ArrayList<Transaction>();
+        List<Transaction> transactions = new ArrayList<>();
         for (String line : lines) {
             Transaction transaction = Transaction.fromLine(line);
             if (transaction != null) {
@@ -1152,7 +1157,7 @@ public class LibrarySwingApp {
     }
 
     private void saveTransactions(List<Transaction> transactions) {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         for (Transaction transaction : transactions) {
             lines.add(transaction.toLine());
         }
